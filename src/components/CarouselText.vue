@@ -1,8 +1,8 @@
 <template lang="html">
     <v-layout class="title-carousel">
         <div class="container">
-            <h4>Hello</h4>
-            <p>LUN-VIE : 8 am - 5 pm</p>
+            <h4>{{ placeName }}</h4>
+            <p>{{ fullAddress }}</p>
         </div>
     </v-layout>
 </template>
@@ -10,6 +10,10 @@
 <script>
 export default {
     name: "CarouselText",
+    props: {
+        placeName: String,
+        fullAddress: String
+    },
     data() {
         return {
 

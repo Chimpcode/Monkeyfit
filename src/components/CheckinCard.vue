@@ -2,9 +2,11 @@
     <v-card>
         <v-card-title primary-title>
             <div class="headline">{{ checkinAuthor }}</div>
-            <div>{{ checkinText }}</div>
-            <div>{{ checkinDate }}</div>
         </v-card-title>
+        <v-card-text>
+            <div>{{ checkinText }}</div>
+            <div>{{ checkinDate }}</div>            
+        </v-card-text>
 
         <v-card-media
             v-if="checkinImgUrl.length > 0"
