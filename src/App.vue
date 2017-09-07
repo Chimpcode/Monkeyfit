@@ -16,7 +16,39 @@
         <v-carousel-item v-for="(item,i) in pictures" :src="item.src" :key="i"></v-carousel-item>
       </v-carousel>
 
+
       <v-container fluid grid-list-md class="grey lighten-4">
+
+        <v-layout row wrap class="mb-4">
+                <v-flex xs12 sm6>
+                    <v-card>
+                        <v-card-title>
+                            Informacion
+                        </v-card-title>
+                        <v-layout row wrap>
+
+                        </v-layout>
+                    </v-card>
+                </v-flex>
+                <v-flex xs12 sm6>
+                    <v-card>
+                        <v-card-title>
+                            Ubicacion
+                        </v-card-title>
+                        <v-layout row wrap>
+                            <div class="ma-2 pa-2">
+                                <gmap-map
+                                  :center="{lat:10, lng:10}"
+                                  :zoom="7"
+                                  map-type-id="terrain"
+                                  style="width: 100%; height: 300px"
+                                ></gmap-map>
+                            </div>
+                        </v-layout>
+                    </v-card>
+                </v-flex>
+        </v-layout>
+
           <v-layout row wrap>
               <v-flex
                 v-bind="{ [`xs${12} sm${checkin.length > 100 ? 6 : 4}`]: true }"
@@ -24,10 +56,10 @@
                 :key="i"
               >
                 <checkin-card
-                  :checkinAuthor="checkin.author"
-                  :checkinImgUrl="checkin.imageUrl"
-                  :checkinText="checkin.text"
-                  :checkinDate="checkin.date"
+                  checkinAuthor=""
+                  :checkinImgUrl="checkin.checkin_image"
+                  :checkinText="checkin.comment"
+                  :checkinDate="checkin.timesince"
                   >
                 </checkin-card>
               </v-flex>
@@ -52,10 +84,12 @@
           return {
             title: 'MonkeyFit',
             fixed: true,
+            startCheckinsPathUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/check-in/place/",
             placePathUrl: "villa-sport-club",
             startPlaceUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/places/",
-            endingPlacePathUrl: "/?format=json",
+            formatJsonUrl: "/?format=json",
             placeUrl: "",
+            checkinsUrl: "",
             pictures: [
                 { src: "../public/4.png"}
             ],
@@ -84,18 +118,29 @@
                 })
             },
             fetchChekins: function () {
-                this.checkins = [
-                    { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
-                    { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
-                    { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
-                    { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
-                    { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" }
-                ]
+                // this.checkins = [
+                //     { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
+                //     { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
+                //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
+                //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
+                //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" }
+                // ]
+                var self = this
+                this.$http.get(this.checkinsUrl).then(res => {
+
+                    res.data.map(function (checkinItem) {
+                        self.checkins.push(checkinItem)
+                    })
+
+                }, err => {
+
+                })
             }
         },
         created: function () {
 
-            this.placeUrl = this.startPlaceUrl + this.placePathUrl + this.endingPlacePathUrl
+            this.placeUrl = this.startPlaceUrl + this.placePathUrl + this.formatJsonUrl
+            this.checkinsUrl = this.startCheckinsPathUrl + this.placePathUrl + this.formatJsonUrl
 
             this.fetchChekins()
             this.fetchGymInfo()

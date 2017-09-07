@@ -5,11 +5,11 @@
         </v-card-title>
         <v-card-text>
             <div>{{ checkinText }}</div>
-            <div>{{ checkinDate }}</div>            
+            <div>{{ checkinDate }}</div>
         </v-card-text>
 
         <v-card-media
-            v-if="checkinImgUrl.length > 0"
+            v-if="checkinImgUrl !== null"
             :src="checkinImgUrl"
             height="200px"
         >
