@@ -1,10 +1,10 @@
 <template>
   <v-app light>
 
-    <v-toolbar fixed :dark="true">
-        <v-btn icon>
-          <v-icon>extension</v-icon>
-        </v-btn>
+    <v-toolbar fixed :dark="true" :prominent="true" class="blue darken-4">
+
+          <img src="../public/Logo.png" style="width: 50px; height: auto; padding-bottom: 5px">
+
         <v-toolbar-title v-text="title" class="white--text">
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -57,6 +57,7 @@
               >
                 <checkin-card
                   checkinAuthor=""
+                  checkinProfilepicture=""
                   :checkinImgUrl="checkin.checkin_image"
                   :checkinText="checkin.comment"
                   :checkinDate="checkin.timesince"
@@ -67,9 +68,9 @@
 
       </v-container>
     </main>
-    <!-- <v-footer :fixed="fixed">
+    <v-footer :fixed="false">
       <span>&copy; 2017</span>
-    </v-footer> -->
+    </v-footer>
   </v-app>
 </template>
 
@@ -82,7 +83,7 @@
         },
         data () {
           return {
-            title: 'MonkeyFit',
+            title: 'monkeyfit',
             fixed: true,
             startCheckinsPathUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/check-in/place/",
             placePathUrl: "villa-sport-club",
