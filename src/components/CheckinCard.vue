@@ -1,39 +1,39 @@
 <template lang="html">
-    <!--
-    <v-dialog v-model="dialog" width="600px" lazy absolute>
-    <v-card slot="activator">
+    <v-card>
       <v-container >
-        <div>{{ checkinDate }}</div>
-                <v-layout row>
-                  <v-flex xs3>
-                  <v-avatar>\
-                  utilizando el servicio de profile picture de Beto
-                  <v-card-media
-                      v-if="checkinImgUrl !== null"
-                      :src="checkinImgUrl"
-                      height="200px"
-                  >
-
-                </v-avatar>
-                  </v-flex>
-                  <v-flex xs9>
-                    <div>
-                      <div class="headline">{{checkinAuthor}}</div>
-                    </div>
-                  </v-flex>
-                </v-layout>
+        <div class="right">{{ checkinDate }}</div>
+          <v-layout row>
+            <v-flex xs3>
+            <v-avatar v-if="checkinProfPic !== null">
+           <img
+                :src="checkinProfPic"
+                height="50px"
+                weight="auto"
+            >
+          </img>
+          </v-avatar>
+          <v-avatar v-else>
+            <img src="../../public/Profpic_default.png" height="50px" weight="auto">
+            </img>
+          </v-avatar>
+            </v-flex>
+            <v-flex xs9>
+              <div>
+                <div class="headline">{{checkinAuthor}}</div>
+              </div>
+            </v-flex>
+          </v-layout>
       </v-container>
         <v-card-text>
-            <div>{{ checkinText }}</div>
+            <div><h5>{{ checkinText }}</h5></div>
         </v-card-text>
         <v-card-media
             v-if="checkinImgUrl !== null"
             :src="checkinImgUrl"
             height="200px"
         >
-
-        </v-card-media>
-            Podrian agregarle mas funciones a los checkins
+      </v-card-media>
+            <!-- Podrian agregarle mas funciones a los checkins
             reutilizar el direccionamiento de las redes
             sociales o el perfil de los autores, de momento se busca persentar
             un dialog con la foto publicada y el comentario del checkin. Mxlr
@@ -48,45 +48,8 @@
             <v-btn icon>
               <v-icon>share</v-icon>
             </v-btn>
-        </v-card-actions>
+        </v-card-actions>-->
     </v-card>
-    </v-dialog>
-    -->
-
-    <v-card>
-      <v-container fluid grid-list-lg>
-        <div>{{ checkinDate }}</div>
-                <v-layout row>
-                  <v-flex xs3>
-                  <v-avatar>\
-                  <!-- utilizando el servicio de profile picture de Beto
-                  <v-card-media
-                      v-if="checkinImgUrl !== null"
-                      :src="checkinImgUrl"
-                      height="200px"
-                  >
-                  -->
-                  </v-avatar>
-                  </v-flex>
-                  <v-flex xs9>
-                    <div>
-                      <div class="headline">{{checkinAuthor}}</div>
-                    </div>
-                  </v-flex>
-                </v-layout>
-      </v-container>
-        <v-card-text>
-            <div>{{ checkinText }}</div>
-        </v-card-text>
-        <v-card-media
-            v-if="checkinImgUrl !== null"
-            :src="checkinImgUrl"
-            height="300px"
-            weight=auto
-        >
-
-        </v-card-media>
-      </v-card>
 </template>
 
 <script>
@@ -99,7 +62,11 @@ export default {
             default: ""
         },
         checkinAuthor: String,
-        checkinDate: String
+        checkinDate: String,
+        checkinProfPic: {
+            type: String,
+            default: ""
+        }
     },
     data() {
         return {

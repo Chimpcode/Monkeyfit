@@ -41,7 +41,7 @@
                                   :center="{lat:10, lng:10}"
                                   :zoom="7"
                                   map-type-id="terrain"
-                                  style="width: 100%; height: 300px"
+                                  style="width: 100%; height: 250px"
                                 ></gmap-map>
                             </div>
                         </v-layout>
@@ -56,8 +56,8 @@
                 :key="i"
               >
                 <checkin-card
-                  checkinAuthor=""
-                  checkinProfilepicture=""
+                  :checkinAuthor="checkin.full_username"
+                  :checkinProfPic="checkin.profile_image"
                   :checkinImgUrl="checkin.checkin_image"
                   :checkinText="checkin.comment"
                   :checkinDate="checkin.timesince"
@@ -69,7 +69,7 @@
       </v-container>
     </main>
     <v-footer :fixed="false">
-      <span>&copy; 2017</span>
+      <span>monkeyfit &copy; 2017</span>
     </v-footer>
   </v-app>
 </template>
@@ -86,7 +86,7 @@
             title: 'monkeyfit',
             fixed: true,
             startCheckinsPathUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/check-in/place/",
-            placePathUrl: "villa-sport-club",
+            placePathUrl: "academia-de-natacion-angel-romero",
             startPlaceUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/places/",
             formatJsonUrl: "/?format=json",
             placeUrl: "",
