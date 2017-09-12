@@ -31,8 +31,9 @@
             v-if="checkinImgUrl !== null"
             :src="checkinImgUrl"
             height="200px"
+            @click.native.stop="dialog = true"
         >
-      </v-card-media>
+        </v-card-media>
             <!-- Podrian agregarle mas funciones a los checkins
             reutilizar el direccionamiento de las redes
             sociales o el perfil de los autores, de momento se busca persentar
@@ -49,6 +50,16 @@
               <v-icon>share</v-icon>
             </v-btn>
         </v-card-actions>-->
+        <v-dialog v-model="dialog" width="600px">
+          <v-card>
+            <v-card-media
+            :src="checkinImgUrl"
+            height="600px"
+            weight="auto"
+            >
+            </v-card-media>
+          </v-card>
+        </v-dialog>
     </v-card>
 </template>
 
