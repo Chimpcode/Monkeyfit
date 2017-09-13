@@ -52,12 +52,38 @@
         </v-card-actions>-->
         <v-dialog v-model="dialog" width="600px">
           <v-card>
+            <v-layout row>
+              <v-flex xs2 class="text-xs-right">
+              <v-avatar v-if="checkinProfPic !== null">
+             <img
+                  :src="checkinProfPic"
+                  height="50px"
+                  weight="auto"
+                  style="margin: 10px"
+
+              >
+            </img>
+            </v-avatar>
+            <v-avatar v-else style="margin: 10px;">
+              <img src="../../public/Profpic_default.png" height="50px" weight="auto">
+              </img>
+            </v-avatar>
+              </v-flex>
+              <v-flex xs10>
+                <div>
+                  <div class="headline">{{checkinAuthor}}</div>
+                </div>
+              </v-flex>
+            </v-layout>
             <v-card-media
             :src="checkinImgUrl"
             height="600px"
             weight="auto"
             >
             </v-card-media>
+            <v-card-text>
+                <div><h6>{{ checkinText }}</h6></div>
+            </v-card-text>
           </v-card>
         </v-dialog>
     </v-card>
@@ -76,7 +102,7 @@ export default {
         checkinDate: String,
         checkinProfPic: {
             type: String,
-            default: ""
+            default: null
         }
     },
     data() {
