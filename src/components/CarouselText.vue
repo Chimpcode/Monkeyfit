@@ -2,7 +2,7 @@
     <v-layout class="title-carousel">
         <div class="container">
             <h4>{{ placeName }}</h4>
-            <p>{{ fullAddress }}</p>
+            <p>{{ placeSum }}</p>
         </div>
     </v-layout>
 </template>
@@ -12,7 +12,7 @@ export default {
     name: "CarouselText",
     props: {
         placeName: String,
-        fullAddress: String
+        placeSum: String
     },
     data() {
         return {
