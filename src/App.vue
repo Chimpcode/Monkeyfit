@@ -21,7 +21,7 @@
 
         <v-layout row wrap class="mb-4">
                 <v-flex xs12 sm6>
-                  <info-card
+                  <infor-card
                     :placeAddress="gym.address"
                     :placePhone1="gym.phone1"
                     :placePhone2="gym.phone2"
@@ -43,7 +43,7 @@
 
                         </v-layout>
                     </v-card>-->
-                  </info-card>
+                  </infor-card>
                 </v-flex>
                 <v-flex xs12 sm6>
                     <v-card>
@@ -92,10 +92,10 @@
 <script>
     import CarouselText from './components/CarouselText.vue'
     import CheckinCard from './components/CheckinCard.vue'
-    import InfoCard from './components/InfoCard.vue'
+    import InforCard from './components/InforCard.vue'
     export default {
         components: {
-            CarouselText, CheckinCard, InfoCard
+            CarouselText, CheckinCard, InforCard
         },
         data () {
           return {
@@ -121,6 +121,7 @@
                 this.pictures = []
                 this.pictures = pictures
 
+            },
 
             fetchGymInfo: function () {
                 // this.gym = { name: "ASQWE", schedule: "45/78" }
@@ -140,7 +141,7 @@
                     this.gym.sum = res.data.summary
                     this.gym.thumbs = res.data.thumbsup_counter
                     this.gym.sports = res.data.sports
-                    this gym.public = res.data.is_public_place
+                    this.gym.public = res.data.is_public_place
 
                     let pictures = []
                     pictures.push({ src: this.gym.imageUrl })
