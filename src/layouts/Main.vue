@@ -180,9 +180,9 @@ export default {
     },
     created: function () {
 
-        this.placeUrl = this.startPlaceUrl + this.placePathUrl + this.formatJsonUrl
-        this.checkinsUrl = this.startCheckinsPathUrl + this.placePathUrl + this.formatJsonUrl
-        this.PhotosUrl = this.startPlaceUrl + this.placePathUrl + this.endPhotosUrl + this.formatJsonUrl
+        this.placeUrl = this.startPlaceUrl + (this.$route.params.param_id || this.placePathUrl) + this.formatJsonUrl
+        this.checkinsUrl = this.startCheckinsPathUrl + (this.$route.params.param_id || this.placePathUrl) + this.formatJsonUrl
+        this.PhotosUrl = this.startPlaceUrl + (this.$route.params.param_id || this.placePathUrl) + this.endPhotosUrl + this.formatJsonUrl
 
         this.fetchChekins()
         this.fetchGymInfo()
