@@ -3,9 +3,9 @@
     <v-container>
       <div>{{placeAdress}}</div>
       <v-layout  row>
-        <v-flex xs10>
+        <v-flex xs8>
         <v-list>
-          <v-list-tile>
+          <v-list-tile :href="callphone1">
             <v-list-tile-action>
               <v-icon class="blue--text text--darken-2">phone</v-icon>
             </v-list-tile-action>
@@ -14,7 +14,7 @@
               <v-list-tile-sub-title>Telefono</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile :href="callphone2">
             <v-list-tile-action>
               <v-icon class="blue--text text--darken-2">phone</v-icon>
             </v-list-tile-action>
@@ -43,10 +43,41 @@
           </v-list-tile>
         </v-list>
         </v-flex>
-        <v-flex xs2 center>
+        <v-flex xs4 center>
         <v-icon x-large class="blue--text text--darken-2">thumb_up</v-icon>
         <h6>{{placeThumbsup}}</h6>
         </v-flex>
+      </v-layout>
+      <v-layout row>
+        <v-flex xs9>
+        <v-flex xs3 center
+        v-if="placeFacebook != null">
+          <a href="placeFacebook">
+            <v-icon class="blue--text text--darken-2">mdi-facebook-box</v-icon>
+          </a>
+        </v-flex>
+        <v-flex xs3 center
+        v-if="placeTwitter != null">
+          <a href="placeTwitter">
+            <v-icon class="light-blue--text">mdi-twitter-box</v-icon>
+          </a>
+        </v-flex>
+        <v-flex xs3 center
+        v-if="placeInstagram != null">
+          <a href="placeInstagram">
+            <v-icon class="pink--text text--darken-3">mdi-instagram</v-icon>
+          </a>
+        </v-flex>
+        <v-flex xs3 center
+        v-if="PlaceYoutube != null">
+          <a href="PlaceYoutube">
+            <v-icon class="red--text">mdi-youtube-play</v-icon>
+          </a>
+        </v-flex>
+      </v-flex>
+      <v-flex xs3>
+
+      </v-flex>
       </v-layout>
     </v-container>
 
@@ -57,22 +88,43 @@ export default {
     name: "InforCard",
     props: {
         placeAdress: String,
+        placeScore: Number,
         placePhone1: String,
         placePhone2: String,
         placewhatsapp: String,
         placeWeb: String,
         placeSports: Array,
         placeThumbsup: Number,
-        placeFacebook: String,
-        placeInstagram: String,
-        PlaceYoutube: String,
-        placeTwitter: String,
+        placeFacebook: {
+          type:String,
+          default:"http://google.com"
+        },
+        placeInstagram: {
+          type: String,
+          default:"null"
+        },
+        PlaceYoutube:  {
+          type:String,
+          default:"null"
+        },
+        placeTwitter:  {
+          type:String,
+          default:"null"
+        },
         placePublic: Boolean,
     },
     data() {
         return {
-
+          callphone1:"",
+          callphone2:"",
+          openwtsap:"",
+          phonedial:"tel:+"
         }
+    },
+
+    created: function () {
+      this.callphone1 = this.phonedial + this.placePhone1
+      this.callphone2 = this.phonedial + this.placePhone2
     }
 }
 </script>

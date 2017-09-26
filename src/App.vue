@@ -8,6 +8,10 @@
         <v-toolbar-title v-text="title" class="white--text">
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <a class="text-xs-right" href='http://play.google.com/store/monkeyfit?pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+            <img alt='Disponible en Google Play' style="width: 25%" src='https://play.google.com/intl/en_us/badges/images/generic/es-419_badge_web_generic.png'/></a>
+        </v-toolbar-items>
     </v-toolbar>
     <main>
       <v-carousel>
@@ -34,6 +38,7 @@
                     :placeSports="gym.sports"
                     :placeThumbsup="gym.thumbs"
                     :placePublic="gym.public"
+                    :placeScore="gym.score"
                     >
                     <!--<v-card>
                         <v-card-title>
@@ -142,6 +147,7 @@
                     this.gym.thumbs = res.data.thumbsup_counter
                     this.gym.sports = res.data.sports
                     this.gym.public = res.data.is_public_place
+                    this.gym.score = res.data.review_score
 
                     let pictures = []
                     pictures.push({ src: this.gym.imageUrl })
