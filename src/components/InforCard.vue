@@ -76,7 +76,11 @@
         </v-flex>
       </v-flex>
       <v-flex xs3>
-
+        <div class="center">
+        
+        </div>
+        <div class="center">
+        </div>
       </v-flex>
       </v-layout>
     </v-container>
