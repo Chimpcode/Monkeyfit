@@ -77,11 +77,14 @@
                   :key="i"
                 >
                   <checkin-card
+                    :checkinId="i"
+                    :checkinsLength="checkins.length"
                     :checkinAuthor="checkin.full_username"
                     :checkinProfPic="checkin.profile_image"
                     :checkinImgUrl="checkin.checkin_image"
                     :checkinText="checkin.comment"
                     :checkinDate="checkin.timesince"
+                    @click.native.stop="onClickCheckinCard(i)"
                     >
                   </checkin-card>
                 </v-flex>
@@ -92,6 +95,61 @@
       <v-footer :fixed="false">
         <span>monkeyfit &copy; 2017</span>
       </v-footer>
+
+      <v-dialog v-model="dialog" width="600px">
+        <v-card>
+          <v-layout row>
+              <v-flex sm1 class="dialog-arrows">
+                  <template v-if = "checkinInDialog.checkinId > 0" >
+                      <v-icon x-large @click.native="goPrev(checkinInDialog.checkinId)">chevron_left</v-icon>
+                  </template>
+
+              </v-flex>
+              <v-flex xs12 sm10>
+
+                  <v-layout row>
+                      <v-flex xs2 class="text-xs-right">
+                          <v-avatar style="margin: 10px;"
+                                    v-if="checkinInDialog.checkinProfPic === null || checkinInDialog.checkinProfPic === undefined">
+
+                                <img src="../../public/Profpic_default.png" height="50px" weight="auto">
+                                </img>
+                          </v-avatar>
+                          <v-avatar v-else >
+                              <img
+                                    :src="checkinInDialog.checkinProfPic"
+                                    height="50px"
+                                    weight="auto"
+                                    style="margin: 10px"
+
+                                >
+                              </img>
+                          </v-avatar>
+                      </v-flex>
+                    <v-flex xs10>
+                      <div>
+                        <div class="headline">{{checkinInDialog.checkinAuthor}}</div>
+                      </div>
+                    </v-flex>
+                  </v-layout>
+                  <v-card-media
+                  :src="checkinInDialog.checkinImgUrl"
+                  height="400px"
+                  weight="auto"
+                  >
+                  </v-card-media>
+                  <v-card-text>
+                      <div><h6>{{ checkinInDialog.checkinText }}</h6></div>
+                  </v-card-text>
+              </v-flex>
+              <v-flex sm1 class="dialog-arrows">
+                  <template v-if = "checkinInDialog.checkinId < (checkinInDialog.checkinLength - 1)">
+                      <v-icon x-large v-bind:click="goNext(checkinInDialog.checkinId)">chevron_right</v-icon>
+                  </template>
+              </v-flex>
+          </v-layout row>
+        </v-card>
+      </v-dialog>
     </v-app>
 </template>
 
@@ -120,7 +178,16 @@ export default {
             { src: "../public/4.png"}
         ],
         checkins: [],
-        gym: {}
+        gym: {},
+        dialog: false,
+        checkinInDialog: {
+            checkinId: 0,
+            checkinLength: 1,
+            checkinProfPic: "",
+            checkinAuthor: "",
+            checkinImgUrl: "",
+            checkinText: ""
+        }
       }
     },
     methods: {
@@ -169,13 +236,64 @@ export default {
             var self = this
             this.$http.get(this.checkinsUrl).then(res => {
 
-                res.data.map(function (checkinItem) {
+                res.data.results.map(function (checkinItem) {
                     self.checkins.push(checkinItem)
                 })
 
             }, err => {
 
             })
+        },
+        onClickCheckinCard: function (index) {
+
+            this.checkinInDialog = {}
+
+            this.checkinInDialog.checkinId = index
+            this.checkinInDialog.checkinLength = this.checkins.length
+            this.checkinInDialog.checkinProfPic = this.checkins[index].profile_image
+            this.checkinInDialog.checkinAuthor = this.checkins[index].full_username
+            this.checkinInDialog.checkinImgUrl = this.checkins[index].checkin_image
+            this.checkinInDialog.checkinText = this.checkins[index].comment
+
+            console.log(this.checkinInDialog.checkinId);
+            console.log(this.checkinInDialog.checkinId < this.checkinInDialog.checkinLength)
+
+            this.dialog = true
+        },
+        goPrev: function (index) {
+            // this.checkinId
+            console.log("goPrev");
+
+            // setTimeout(function () {
+            //     this.dialog = false
+            // }, 100)
+            if (this.checkinInDialog.checkinId !== undefined) {
+
+                this.checkinInDialog.checkinId = index-1
+                this.checkinInDialog.checkinLength = this.checkins.length
+                this.checkinInDialog.checkinProfPic = this.checkins[index-1].profile_image
+                this.checkinInDialog.checkinAuthor = this.checkins[index-1].full_username
+                this.checkinInDialog.checkinImgUrl = this.checkins[index-1].checkin_image
+                this.checkinInDialog.checkinText = this.checkins[index-1].comment
+            }
+
+
+            // setTimeout(function () {
+            //     this.dialog = true
+            // }, 700)
+        },
+        goNext: function (index) {
+            console.log("goNext");
+            // this.dialog = false
+            if (index < (this.checkins.length-1)) {
+
+                this.checkinInDialog.checkinId = index+1
+                this.checkinInDialog.checkinLength = this.checkins.length
+                this.checkinInDialog.checkinProfPic = this.checkins[index+1].profile_image
+                this.checkinInDialog.checkinAuthor = this.checkins[index+1].full_username
+                this.checkinInDialog.checkinImgUrl = this.checkins[index+1].checkin_image
+                this.checkinInDialog.checkinText = this.checkins[index+1].comment
+            }
         }
     },
     created: function () {

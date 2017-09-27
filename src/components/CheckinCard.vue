@@ -50,42 +50,6 @@
               <v-icon>share</v-icon>
             </v-btn>
         </v-card-actions>-->
-        <v-dialog v-model="dialog" width="600px">
-          <v-card>
-            <v-layout row>
-              <v-flex xs2 class="text-xs-right">
-              <v-avatar v-if="checkinProfPic !== null">
-             <img
-                  :src="checkinProfPic"
-                  height="50px"
-                  weight="auto"
-                  style="margin: 10px"
-
-              >
-            </img>
-            </v-avatar>
-            <v-avatar v-else style="margin: 10px;">
-              <img src="../../public/Profpic_default.png" height="50px" weight="auto">
-              </img>
-            </v-avatar>
-              </v-flex>
-              <v-flex xs10>
-                <div>
-                  <div class="headline">{{checkinAuthor}}</div>
-                </div>
-              </v-flex>
-            </v-layout>
-            <v-card-media
-            :src="checkinImgUrl"
-            height="600px"
-            weight="auto"
-            >
-            </v-card-media>
-            <v-card-text>
-                <div><h6>{{ checkinText }}</h6></div>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
     </v-card>
 </template>
 
@@ -93,6 +57,8 @@
 export default {
     name: "CheckinCard",
     props: {
+        checkinId: Number,
+        checkinsLength: Number,
         checkinText: String,
         checkinImgUrl: {
             type: String,
@@ -109,9 +75,20 @@ export default {
         return {
             dialog: false
         }
+    },
+    methods: {
+        goPrev: function () {
+            // this.checkinId
+        },
+        goNext: function () {
+
+        }
     }
 }
 </script>
 
-<style lang="css">
+<style lang="stylus">
+.dialog-arrows
+    line-height: 39
+
 </style>
