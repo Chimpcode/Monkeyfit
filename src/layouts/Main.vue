@@ -104,12 +104,12 @@
         <span>monkeyfit &copy; 2017</span>
       </v-footer>
 
-      <v-dialog v-model="dialog" width="600px">
+      <v-dialog v-model="dialog"  persistent width="50%">
         <v-card>
           <v-layout row>
               <v-flex sm1 class="dialog-arrows">
                   <template v-if = "checkinInDialog.checkinId > 0" >
-                      <v-icon x-large @click.native="goPrev(checkinInDialog.checkinId)">chevron_left</v-icon>
+                      <v-icon x-large v-on:click="goPrev(checkinInDialog.checkinId)">chevron_left</v-icon>
                   </template>
 
               </v-flex>
@@ -152,7 +152,7 @@
               </v-flex>
               <v-flex sm1 class="dialog-arrows">
                   <template v-if = "checkinInDialog.checkinId < (checkinInDialog.checkinLength - 1)">
-                      <v-icon x-large v-bind:click="goNext(checkinInDialog.checkinId)">chevron_right</v-icon>
+                      <v-icon x-large @click.native="goNext(checkinInDialog.checkinId)">chevron_right</v-icon>
                   </template>
               </v-flex>
           </v-layout row>
@@ -308,10 +308,8 @@ export default {
             // this.checkinId
             console.log("goPrev");
 
-            // setTimeout(function () {
-            //     this.dialog = false
-            // }, 100)
-            if (this.checkinInDialog.checkinId !== undefined) {
+            console.log(this.checkinInDialog.checkinText) 
+            if (this.checkinInDialog.checkinId !== 0) {
 
                 this.checkinInDialog.checkinId = index-1
                 this.checkinInDialog.checkinLength = this.checkins.length
@@ -320,11 +318,8 @@ export default {
                 this.checkinInDialog.checkinImgUrl = this.checkins[index-1].checkin_image
                 this.checkinInDialog.checkinText = this.checkins[index-1].comment
             }
+            console.log(this.checkinInDialog.checkinText) 
 
-
-            // setTimeout(function () {
-            //     this.dialog = true
-            // }, 700)
         },
         goNext: function (index) {
             console.log("goNext");

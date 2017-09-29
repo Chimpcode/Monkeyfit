@@ -77,19 +77,20 @@ export default {
         }
     },
     methods: {
-        goPrev: function () {
-            // this.checkinId
-        },
-        goNext: function () {
-
-        }
+        // goPrev: function () {
+        //     // this.checkinId
+        //     console.log("Something")
+        // },
+        // goNext: function () {
+        //     console.log("Something")
+        // }
     }
 }
 </script>
 
 <style lang="stylus">
-.dialog-arrows
-    line-height: 39
+// .dialog-arrows
+    // line-height: 39
 .comment
     word-break: break-word
 </style>
