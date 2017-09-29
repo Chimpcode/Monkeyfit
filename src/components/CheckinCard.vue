@@ -25,7 +25,7 @@
           </v-layout>
       </v-container>
         <v-card-text>
-            <div><h5>{{ checkinText }}</h5></div>
+            <div><h5 class="comment">{{ checkinText }}</h5></div>
         </v-card-text>
         <v-card-media
             v-if="checkinImgUrl !== null"
@@ -90,5 +90,6 @@ export default {
 <style lang="stylus">
 .dialog-arrows
     line-height: 39
-
+.comment
+    word-break: break-word
 </style>

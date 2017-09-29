@@ -52,19 +52,27 @@
                     </infor-card>
                   </v-flex>
                   <v-flex xs12 sm6>
-                      <v-card>
+                      <v-card height="315px">
                           <v-card-title>
                               Ubicacion
                           </v-card-title>
                           <v-layout row wrap>
-                              <div class="ma-2 pa-2">
-                                  <gmap-map
-                                    :center="{lat:10, lng:10}"
-                                    :zoom="7"
-                                    map-type-id="terrain"
-                                    style="width: 100%; height: 250px"
-                                  ></gmap-map>
-                              </div>
+                                <div class="ma-2 pa-2">
+                                    <gmap-map 
+                                        v-if="gym.lat !== undefined && gym.lon !== undefined"
+                                        :center="{lat:gym.lat, lng: gym.lon}"
+                                        :zoom="12"
+                                        map-type-id="terrain"
+                                        style="width: 98%; height: 250px; position: absolute; left:6px; top:50px;"
+                                    >
+                                        <gmap-marker
+                                            :position="{lat:gym.lat, lng: gym.lon}"
+                                            :clickable="true"
+                                            :draggable="false"
+                                            @click="center={lat:gym.lat, lng: gym.lon}"
+                                        ></gmap-marker>
+                                  </gmap-map>
+                                </div>
                           </v-layout>
                       </v-card>
                   </v-flex>
@@ -175,7 +183,8 @@ export default {
         checkinsUrl: "",
         PhotosUrl:"",
         pictures: [
-            { src: "../public/4.png"}
+            { src: "../public/4.png" },
+            { src: "../public/4.png" }
         ],
         checkins: [],
         gym: {},
@@ -194,7 +203,37 @@ export default {
         setCarouselImages: function (pictures) {
             this.pictures = []
             this.pictures = pictures
+            console.log(pictures) 
 
+        },
+
+        fetchGymPhoto: function () {
+
+            let image_p = 0
+            var p_images = [] // only p images
+            var mix_images = [] // only p + c images
+            this.$http.get(this.PhotosUrl)
+            .then(function (res) {
+                res.data.results.map(function (image) {
+                    if (image.photo_type === 'P') {
+                        image_p++
+                        p_images.push({ src: image.photo_url})
+                        mix_images.push({ src: image.photo_url})
+                    } else if(image.photo_type === 'C') {
+                        mix_images.push({ src: image.photo_url})
+                    }
+                })
+                console.log("*** image_p")
+                console.log(mix_images)
+                if (image_p > 2) {
+                    this.setCarouselImages(p_images)
+                } else {
+                    this.setCarouselImages(mix_images)
+                }
+            })
+            .catch(function (err) {
+
+            })
         },
 
         fetchGymInfo: function () {
@@ -203,6 +242,8 @@ export default {
             this.$http.get(this.placeUrl).then(res => {
                 this.gym.name = res.data.place_name
                 this.gym.address = res.data.full_address
+                this.gym.lon = Number(res.data.longitude) 
+                this.gym.lat = Number(res.data.latitude)
                 this.gym.imageUrl = res.data.place_image
                 this.gym.phone1 = res.data.telephone1
                 this.gym.phone2 = res.data.telephone2
@@ -220,7 +261,10 @@ export default {
 
                 let pictures = []
                 pictures.push({ src: this.gym.imageUrl })
-                this.setCarouselImages(pictures)
+                // this.setCarouselImages(pictures)
+
+               this.fetchGymPhoto()
+
             }, err => {
 
             })
@@ -255,8 +299,8 @@ export default {
             this.checkinInDialog.checkinImgUrl = this.checkins[index].checkin_image
             this.checkinInDialog.checkinText = this.checkins[index].comment
 
-            console.log(this.checkinInDialog.checkinId);
-            console.log(this.checkinInDialog.checkinId < this.checkinInDialog.checkinLength)
+            // console.log(this.checkinInDialog.checkinId);
+            // console.log(this.checkinInDialog.checkinId < this.checkinInDialog.checkinLength)
 
             this.dialog = true
         },
@@ -306,7 +350,7 @@ export default {
         this.fetchGymInfo()
 
         // MAX >>> AQUI RECIBES EL ID DEL POST / CHECKIN LO QUE SEA QUE DEBIA ESTAR AQUI
-        console.log(this.$route.params)
+        // console.log(this.$route.params)
     }
 }
 </script>
