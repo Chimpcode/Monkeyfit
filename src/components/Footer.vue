@@ -1,11 +1,15 @@
 <template lang="html">
-  <div class="container center">
+  <div class="text-xs-center">
 
+
+
+    <span>monkeyfit &copy; 2017 - Todos los derechos reservados</span>
   </div>
 </template>
 
 <script>
 export default {
+  name:Footerdiv,
 }
 </script>
 

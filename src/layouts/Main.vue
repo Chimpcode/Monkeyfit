@@ -70,7 +70,7 @@
                       </v-card>
                   </v-flex>
           </v-layout>
-          <h4>Experiencias</h4>
+          <h4 class="blue--text text--darken-2">Experiencias</h4>
     <!--Checkins-->
             <v-layout row wrap>
                 <v-flex
@@ -290,7 +290,7 @@ export default {
 
                 }, err => {
 
-                })                
+                })
             } else {
                 var self = this
                 this.$http.get(this.checkinsUrl).then(res => {
