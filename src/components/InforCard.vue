@@ -127,11 +127,43 @@ export default {
           startchat:""
         }
     },
+    watch: { 
+      placePhone1: function(newVal, oldVal) { // watch it
+        console.log('Prop placePhone1 changed: ', newVal, ' | was: ', oldVal)
+        this.updatePhoneNumbers(newVal, 'phone1')
+      },
+      placePhone2: function(newVal, oldVal) { // watch it
+        console.log('Prop placePhone2 changed: ', newVal, ' | was: ', oldVal)
+        this.updatePhoneNumbers(newVal, 'phone2')
+      },
+      placewhatsapp: function(newVal, oldVal) { // watch it
+        console.log('Prop placewhatsapp changed: ', newVal, ' | was: ', oldVal)
+        this.updatePhoneNumbers(newVal, 'wzp')
+      }
+    },
+    methods: {
+      updatePhoneNumbers: function (new_val, new_type) {
+  
+        if( new_type === 'phone1') {
+          this.callphone1 = this.phonedial + new_val
+          console.log('phone call 1: ', this.callphone1)    
+        
+        }
+        else if(new_type === 'phone2') {
+          this.callphone2 = this.phonedial + new_val
+          console.log('phone call 2: ', this.callphone2)    
+  
+        }
+        else if(new_type === 'wzp') {
+          this.startchat = this.openwtsap + new_val
+          console.log('phone call wzp: ', this.startchat)    
+
+        }
+      }
+    },
 
     created: function () {
-      this.callphone1 = this.phonedial + this.placePhone1
-      this.callphone2 = this.phonedial + this.placePhone2
-      this.startchat = this.openwtsap + this.placewhatsapp
+      this.updatePhoneNumbers(undefined, undefined, undefined)
     }
 }
 </script>
