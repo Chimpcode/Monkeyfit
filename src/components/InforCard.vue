@@ -1,7 +1,7 @@
 <template lang="html">
   <v-card>
+    <span class="headline">{{placeAdress}}</span>
     <v-container>
-      <div>{{placeAdress}}</div>
       <v-layout  row>
         <v-flex xs8>
         <v-list>
@@ -23,7 +23,7 @@
               <v-list-tile-sub-title>Telefono</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile :href="placeWeb">
             <v-list-tile-action>
               <v-icon class="blue--text text--darken-2">public</v-icon>
             </v-list-tile-action>
@@ -32,9 +32,9 @@
               <v-list-tile-sub-title>pagina web</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile>
+          <v-list-tile :href="startchat">
             <v-list-tile-action>
-              <v-icon class="green--text text--darken-2">phone</v-icon>
+              <v-icon class="green--text text--darken-2">mdi-whatsapp</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{placewhatsapp}}</v-list-tile-title>
@@ -77,7 +77,7 @@
       </v-flex>
       <v-flex xs3>
         <div class="center">
-        
+
         </div>
         <div class="center">
         </div>
@@ -101,7 +101,7 @@ export default {
         placeThumbsup: Number,
         placeFacebook: {
           type:String,
-          default:"http://google.com"
+          default:"http://facebook.com"
         },
         placeInstagram: {
           type: String,
@@ -119,16 +119,21 @@ export default {
     },
     data() {
         return {
+          placePhone1:String,
+          placePhone2:String,
+          placewhatsapp:String,
           callphone1:"",
           callphone2:"",
-          openwtsap:"",
-          phonedial:"tel:+"
+          openwtsap:"https://api.whatsapp.com/send?phone=",
+          phonedial:"tel:+",
+          startchat:""
         }
     },
 
     created: function () {
       this.callphone1 = this.phonedial + this.placePhone1
       this.callphone2 = this.phonedial + this.placePhone2
+      this.startchat = this.openwtsap + this.placewhatsapp
     }
 }
 </script>

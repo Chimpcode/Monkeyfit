@@ -1,8 +1,10 @@
 # monkeyfit
 
-> a monkeyfit web project 
+> Perfil WEB de Lugares monkeyfit
 
 ## Build Setup
+
+>NPM version: 3.10.10
 
 ``` bash
 # install dependencies

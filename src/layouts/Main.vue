@@ -9,7 +9,7 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <a class="text-xs-right" href='http://play.google.com/store/monkeyfit?pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+            <a class="text-xs-right hidden-sm-and-down" href='http://play.google.com/store/monkeyfit?pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
               <img alt='Disponible en Google Play' style="width: 25%" src='https://play.google.com/intl/en_us/badges/images/generic/es-419_badge_web_generic.png'/>
             </a>
           </v-toolbar-items>
@@ -41,14 +41,7 @@
                       :placePublic="gym.public"
                       :placeScore="gym.score"
                       >
-                      <!--<v-card>
-                          <v-card-title>
-                              Informacion
-                          </v-card-title>
-                          <v-layout row wrap>
 
-                          </v-layout>
-                      </v-card>-->
                     </infor-card>
                   </v-flex>
                   <v-flex xs12 sm6>
@@ -58,7 +51,7 @@
                           </v-card-title>
                           <v-layout row wrap>
                                 <div class="ma-2 pa-2">
-                                    <gmap-map 
+                                    <gmap-map
                                         v-if="gym.lat !== undefined && gym.lon !== undefined"
                                         :center="{lat:gym.lat, lng: gym.lon}"
                                         :zoom="12"
@@ -77,6 +70,7 @@
                       </v-card>
                   </v-flex>
           </v-layout>
+          <h4>Experiencias</h4>
     <!--Checkins-->
             <v-layout row wrap>
                 <v-flex
@@ -203,7 +197,7 @@ export default {
         setCarouselImages: function (pictures) {
             this.pictures = []
             this.pictures = pictures
-            console.log(pictures) 
+            console.log(pictures)
 
         },
 
@@ -242,7 +236,7 @@ export default {
             this.$http.get(this.placeUrl).then(res => {
                 this.gym.name = res.data.place_name
                 this.gym.address = res.data.full_address
-                this.gym.lon = Number(res.data.longitude) 
+                this.gym.lon = Number(res.data.longitude)
                 this.gym.lat = Number(res.data.latitude)
                 this.gym.imageUrl = res.data.place_image
                 this.gym.phone1 = res.data.telephone1
@@ -308,7 +302,7 @@ export default {
             // this.checkinId
             console.log("goPrev");
 
-            console.log(this.checkinInDialog.checkinText) 
+            console.log(this.checkinInDialog.checkinText)
             if (this.checkinInDialog.checkinId !== 0) {
 
                 this.checkinInDialog.checkinId = index-1
@@ -318,7 +312,7 @@ export default {
                 this.checkinInDialog.checkinImgUrl = this.checkins[index-1].checkin_image
                 this.checkinInDialog.checkinText = this.checkins[index-1].comment
             }
-            console.log(this.checkinInDialog.checkinText) 
+            console.log(this.checkinInDialog.checkinText)
 
         },
         goNext: function (index) {
