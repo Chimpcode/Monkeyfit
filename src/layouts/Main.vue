@@ -97,6 +97,11 @@
                   </checkin-card>
                 </v-flex>
             </v-layout>
+            <v-layout row wrap class="mb-4 mt-5">
+                <v-flex xs12 offset-sm3 sm6 class="text-sm-center">
+                  <v-btn flat v-on:click="loadMore()">CARGAR M&aacute;S</v-btn>
+                </v-flex>
+            </v-layout>
 
         </v-container>
       </main>
@@ -182,6 +187,7 @@ export default {
         placeUrl: "",
         checkinsUrl: "",
         PhotosUrl:"",
+        nextLink: null,
         pictures: [
             { src: "../public/4.png" },
             { src: "../public/4.png" }
@@ -269,7 +275,7 @@ export default {
 
             })
         },
-        fetchChekins: function () {
+        fetchChekins: function (url_checkins) {
             // this.checkins = [
             //     { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
             //     { text: "abc", imageUrl: "", author: "xyz", date: "15/78/91" },
@@ -277,16 +283,35 @@ export default {
             //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
             //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" }
             // ]
-            var self = this
-            this.$http.get(this.checkinsUrl).then(res => {
+            if (url_checkins !== undefined) {
+                var self = this
+                this.$http.get(url_checkins).then(res => {
 
-                res.data.results.map(function (checkinItem) {
-                    self.checkins.push(checkinItem)
+                    res.data.results.map(function (checkinItem) {
+                        self.checkins.push(checkinItem)
+                    })
+                    if (res.data.next !== null) {
+                        this.nextLink = res.data.next
+                    }
+
+                }, err => {
+
+                })                
+            } else {
+                var self = this
+                this.$http.get(this.checkinsUrl).then(res => {
+
+                    res.data.results.map(function (checkinItem) {
+                        self.checkins.push(checkinItem)
+                    })
+                    if (res.data.next !== null) {
+                        this.nextLink = res.data.next
+                    }
+
+                }, err => {
+
                 })
-
-            }, err => {
-
-            })
+            }
         },
         onClickCheckinCard: function (index) {
 
@@ -332,6 +357,12 @@ export default {
                 this.checkinInDialog.checkinAuthor = this.checkins[index+1].full_username
                 this.checkinInDialog.checkinImgUrl = this.checkins[index+1].checkin_image
                 this.checkinInDialog.checkinText = this.checkins[index+1].comment
+            }
+        },
+        loadMore: function () {
+            if (this.nextLink !== null) {
+
+                this.fetchChekins(this.nextLink)
             }
         }
     },
