@@ -1,7 +1,8 @@
 <template lang="html">
   <v-card>
-    <span class="headline">{{placeAdress}}</span>
+
     <v-container>
+      <span class="headline">{{placeAdress}}</span>
       <v-layout  row>
         <v-flex xs8>
         <v-list>
@@ -119,9 +120,6 @@ export default {
     },
     data() {
         return {
-          placePhone1:String,
-          placePhone2:String,
-          placewhatsapp:String,
           callphone1:"",
           callphone2:"",
           openwtsap:"https://api.whatsapp.com/send?phone=",
