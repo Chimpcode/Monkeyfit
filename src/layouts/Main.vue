@@ -22,55 +22,121 @@
         </v-carousel>
 
 
-        <v-container fluid grid-list-md class="grey lighten-4">
+        <v-container fluid grid-list-md class="background-img">
 
-          <v-layout row wrap class="mb-4">
-                  <v-flex xs12 sm6>
-                    <infor-card
-                      :placeAddress="gym.address"
-                      :placePhone1="gym.phone1"
-                      :placePhone2="gym.phone2"
-                      :placewhatsapp="gym.wsp"
-                      :placeWeb="gym.web"
-                      :placeFacebook="gym.fb"
-                      :placeInstagram="gym.insta"
-                      :PlaceYoutube="gym.yt"
-                      :placeTwitter="gym.twit"
-                      :placeSports="gym.sports"
-                      :placeThumbsup="gym.thumbs"
-                      :placePublic="gym.public"
-                      :placeScore="gym.score"
-                      >
+            <v-layout row wrap class="mb-4" v-if="$route.query.id === undefined">
+                    <v-flex xs12 sm6>
+                        <infor-card
+                        :placeAddress="gym.address"
+                        :placePhone1="gym.phone1"
+                        :placePhone2="gym.phone2"
+                        :placewhatsapp="gym.wsp"
+                        :placeWeb="gym.web"
+                        :placeFacebook="gym.fb"
+                        :placeInstagram="gym.insta"
+                        :PlaceYoutube="gym.yt"
+                        :placeTwitter="gym.twit"
+                        :placeSports="gym.sports"
+                        :placeThumbsup="gym.thumbs"
+                        :placePublic="gym.public"
+                        :placeScore="gym.score"
+                        >
 
-                    </infor-card>
-                  </v-flex>
-                  <v-flex xs12 sm6>
-                      <v-card height="315px">
-                          <v-card-title>
-                              Ubicacion
-                          </v-card-title>
-                          <v-layout row wrap>
-                                <div class="ma-2 pa-2">
-                                    <gmap-map
-                                        v-if="gym.lat !== undefined && gym.lon !== undefined"
-                                        :center="{lat:gym.lat, lng: gym.lon}"
-                                        :zoom="12"
-                                        map-type-id="terrain"
-                                        style="width: 98%; height: 250px; position: absolute; left:6px; top:50px;"
-                                    >
-                                        <gmap-marker
-                                            :position="{lat:gym.lat, lng: gym.lon}"
-                                            :clickable="true"
-                                            :draggable="false"
-                                            @click="center={lat:gym.lat, lng: gym.lon}"
-                                        ></gmap-marker>
-                                  </gmap-map>
-                                </div>
-                          </v-layout>
-                      </v-card>
-                  </v-flex>
-          </v-layout>
-          <h4 class="blue--text text--darken-2">Experiencias</h4>
+                        </infor-card>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-card height="315px">
+                            <v-card-title>
+                                Ubicacion
+                            </v-card-title>
+                            <v-layout row wrap>
+                                    <div class="ma-2 pa-2">
+                                        <gmap-map
+                                            v-if="gym.lat !== undefined && gym.lon !== undefined"
+                                            :center="{lat:gym.lat, lng: gym.lon}"
+                                            :zoom="15"
+                                            map-type-id="terrain"
+                                            style="width: 98%; height: 250px; position: absolute; left:6px; top:50px;"
+                                        >
+                                            <gmap-marker
+                                                :position="{lat:gym.lat, lng: gym.lon}"
+                                                :clickable="true"
+                                                :draggable="false"
+                                                @click="center={lat:gym.lat, lng: gym.lon}"
+                                            ></gmap-marker>
+                                    </gmap-map>
+                                    </div>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+            </v-layout>
+            <v-layout row wrap v-else >    
+                <v-flex xs12 sm4>
+                        <infor-card
+                        :placeAddress="gym.address"
+                        :placePhone1="gym.phone1"
+                        :placePhone2="gym.phone2"
+                        :placewhatsapp="gym.wsp"
+                        :placeWeb="gym.web"
+                        :placeFacebook="gym.fb"
+                        :placeInstagram="gym.insta"
+                        :PlaceYoutube="gym.yt"
+                        :placeTwitter="gym.twit"
+                        :placeSports="gym.sports"
+                        :placeThumbsup="gym.thumbs"
+                        :placePublic="gym.public"
+                        :placeScore="gym.score"
+                        >
+
+                        </infor-card>
+                    </v-flex>
+                    <v-flex xs12 sm4>
+                        <checkin-card
+                            :checkinAuthor="starredCheckin.full_username"
+                            :checkinProfPic="starredCheckin.profile_image"
+                            :checkinImgUrl="starredCheckin.checkin_image"
+                            :checkinText="starredCheckin.comment"
+                            :checkinDate="starredCheckin.timesince"
+                            >
+                        </checkin-card>
+                        <!-- <v-card height="315px">
+                            <v-card-title>
+                                Ubicacion
+                            </v-card-title>
+                            <v-layout row wrap>
+                                    <div class="ma-2 pa-2">
+                                        <h4>Hola</h4> 
+                                    </div>
+                            </v-layout>
+                        </v-card> -->
+                    </v-flex>
+                    <v-flex xs12 sm4>
+                        <v-card height="315px">
+                            <v-card-title>
+                                Ubicacion
+                            </v-card-title>
+                            <v-layout row wrap>
+                                    <div class="ma-2 pa-2">
+                                        <gmap-map
+                                            v-if="gym.lat !== undefined && gym.lon !== undefined"
+                                            :center="{lat:gym.lat, lng: gym.lon}"
+                                            :zoom="12"
+                                            map-type-id="terrain"
+                                            style="width: 98%; height: 250px; position: absolute; left:6px; top:50px;"
+                                        >
+                                            <gmap-marker
+                                                :position="{lat:gym.lat, lng: gym.lon}"
+                                                :clickable="true"
+                                                :draggable="false"
+                                                @click="center={lat:gym.lat, lng: gym.lon}"
+                                            ></gmap-marker>
+                                    </gmap-map>
+                                    </div>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+            </v-layout>    
+            <p class="checkin-list-title">Experiencias</p>
     <!--Checkins-->
             <v-layout row wrap>
                 <v-flex
@@ -93,7 +159,12 @@
             </v-layout>
             <v-layout row wrap class="mb-4 mt-5">
                 <v-flex xs12 offset-sm3 sm6 class="text-sm-center">
-                  <v-btn flat v-on:click="loadMore()">CARGAR M&aacute;S</v-btn>
+                    <v-btn flat v-if="isLoadingMore">
+                        <v-progress-circular indeterminate style="color: blue;"></v-progress-circular>
+                    </v-btn>
+                    <v-btn flat :disabled="nextLink === null" v-on:click="loadMore()" v-else>
+                      CARGAR M&aacute;S
+                    </v-btn>
                 </v-flex>
             </v-layout>
 
@@ -173,6 +244,7 @@ export default {
       return {
         title: 'monkeyfit',
         fixed: true,
+        starredCheckin: {},
         startCheckinsPathUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/check-in/place/",
         placePathUrl: "academia-de-natacion-angel-romero",
         startPlaceUrl: "https://monkeyfit-test.herokuapp.com/api/v1.1/places/",
@@ -181,6 +253,7 @@ export default {
         placeUrl: "",
         checkinsUrl: "",
         PhotosUrl:"",
+        isLoadingMore: false,
         nextLink: null,
         pictures: [
             { src: "../public/4.png" },
@@ -203,7 +276,6 @@ export default {
         setCarouselImages: function (pictures) {
             this.pictures = []
             this.pictures = pictures
-            console.log(pictures)
 
         },
 
@@ -223,8 +295,6 @@ export default {
                         mix_images.push({ src: image.photo_url})
                     }
                 })
-                console.log("*** image_p")
-                console.log(mix_images)
                 if (image_p > 2) {
                     this.setCarouselImages(p_images)
                 } else {
@@ -277,35 +347,53 @@ export default {
             //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" },
             //     { text: "abc", imageUrl: "asdads", author: "xyz", date: "15/78/91" }
             // ]
-            if (url_checkins !== undefined) {
+            // if (url_checkins !== undefined) {
+                this.isLoadingMore = true
                 var self = this
                 this.$http.get(url_checkins).then(res => {
 
+                    this.isLoadingMore = false
                     res.data.results.map(function (checkinItem) {
                         self.checkins.push(checkinItem)
                     })
-                    if (res.data.next !== null) {
-                        this.nextLink = res.data.next
-                    }
+                    this.nextLink = res.data.next
+                    
 
                 }, err => {
 
                 })
-            } else {
-                var self = this
-                this.$http.get(this.checkinsUrl).then(res => {
+            // } else {
+            //     var self = this
+            //     this.$http.get(this.checkinsUrl).then(res => {
 
-                    res.data.results.map(function (checkinItem) {
-                        self.checkins.push(checkinItem)
-                    })
-                    if (res.data.next !== null) {
-                        this.nextLink = res.data.next
-                    }
+            //         res.data.results.map(function (checkinItem) {
+            //             self.checkins.push(checkinItem)
+            //         })
+            //         if (res.data.next !== null) {
+            //             this.nextLink = res.data.next
+            //         }
 
-                }, err => {
+            //     }, err => {
 
-                })
-            }
+            //     })
+            // }
+        },
+        fetchStarredCheckin: function(checkin_id) {
+            this.$http.get("http://monkeyfit-test.herokuapp.com/api/v1.1/check-in/"+checkin_id)
+            .then(function(res) {
+                // res.data.checkin_image
+                // res.data.comment
+                // res.data.thumbs_down
+                // res.data.thumbs_up
+                // res.data.timesince
+                // res.data.timestamp
+
+                this.starredCheckin = res.data
+            })
+            .catch(function(err){
+
+            })
+            
         },
         onClickCheckinCard: function (index) {
 
@@ -318,16 +406,12 @@ export default {
             this.checkinInDialog.checkinImgUrl = this.checkins[index].checkin_image
             this.checkinInDialog.checkinText = this.checkins[index].comment
 
-            // console.log(this.checkinInDialog.checkinId);
-            // console.log(this.checkinInDialog.checkinId < this.checkinInDialog.checkinLength)
 
             this.dialog = true
         },
         goPrev: function (index) {
             // this.checkinId
-            console.log("goPrev");
 
-            console.log(this.checkinInDialog.checkinText)
             if (this.checkinInDialog.checkinId !== 0) {
 
                 this.checkinInDialog.checkinId = index-1
@@ -337,11 +421,9 @@ export default {
                 this.checkinInDialog.checkinImgUrl = this.checkins[index-1].checkin_image
                 this.checkinInDialog.checkinText = this.checkins[index-1].comment
             }
-            console.log(this.checkinInDialog.checkinText)
 
         },
         goNext: function (index) {
-            console.log("goNext");
             // this.dialog = false
             if (index < (this.checkins.length-1)) {
 
@@ -355,7 +437,7 @@ export default {
         },
         loadMore: function () {
             if (this.nextLink !== null) {
-
+                console.log("loadmores")
                 this.fetchChekins(this.nextLink)
             }
         }
@@ -366,14 +448,29 @@ export default {
         this.checkinsUrl = this.startCheckinsPathUrl + (this.$route.params.param_id || this.placePathUrl) + this.formatJsonUrl
         this.PhotosUrl = this.startPlaceUrl + (this.$route.params.param_id || this.placePathUrl) + this.endPhotosUrl + this.formatJsonUrl
 
-        this.fetchChekins()
+        this.fetchChekins(this.checkinsUrl)
         this.fetchGymInfo()
 
+        if(this.$route.query.id !== undefined) {
+            this.fetchStarredCheckin(this.$route.query.id)
+        }
+                
         // MAX >>> AQUI RECIBES EL ID DEL POST / CHECKIN LO QUE SEA QUE DEBIA ESTAR AQUI
-        // console.log(this.$route.params)
     }
 }
 </script>
 
-<style lang="css">
+<style lang="stylus">
+.background-img
+    background-image: url("../../public/background_4.jpg");
+    background-repeat: repeat;
+.checkin-list-title
+    color: #90a5bb
+    text-align: center
+    font-style: italic
+    font-size: 30px
+    font-weight: 100
+    margin-bottom: 20px
+.dialog-arrows
+    line-height: 35
 </style>

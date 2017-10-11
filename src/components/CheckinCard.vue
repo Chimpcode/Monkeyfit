@@ -1,7 +1,7 @@
 <template lang="html">
-    <v-card>
+    <v-card class="white">
       <v-container >
-        <div class="right">{{ checkinDate }}</div>
+        <div class="right">{{ checkinFormatedDate }}</div>
           <v-layout row>
             <v-flex xs3>
             <v-avatar v-if="checkinProfPic !== null">
@@ -74,6 +74,18 @@ export default {
     data() {
         return {
             dialog: false
+        }
+    },
+    computed: {
+        checkinFormatedDate: function() {
+            return this.checkinDate.replace("hours","horas")
+                                    .replace("hour","hora")
+                                    .replace("minutes","minutos")
+                                    .replace("seconds","segundos")
+                                    .replace("day","dia")
+                                    .replace("days","dias")
+                                    .replace("week","semana")
+                                    .replace("weeks","semanas")
         }
     },
     methods: {
