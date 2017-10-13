@@ -384,7 +384,7 @@ export default {
             // }
         },
         fetchStarredCheckin: function(checkin_id) {
-            this.$http.get("http://monkeyfit-test.herokuapp.com/api/v1.1/check-in/"+checkin_id)
+            this.$http.get("http://monkeyfit-test.herokuapp.com/api/v1.1/check-in/"+checkin_id+"/")
             .then(function(res) {
                 // res.data.checkin_image
                 // res.data.comment
@@ -392,7 +392,8 @@ export default {
                 // res.data.thumbs_up
                 // res.data.timesince
                 // res.data.timestamp
-
+                console.log(res)
+                console.log('res')
                 this.starredCheckin = res.data
             })
             .catch(function(err){

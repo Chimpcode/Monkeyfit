@@ -78,14 +78,19 @@ export default {
     },
     computed: {
         checkinFormatedDate: function() {
-            return this.checkinDate.replace("hours","horas")
-                                    .replace("hour","hora")
-                                    .replace("minutes","minutos")
-                                    .replace("seconds","segundos")
-                                    .replace("day","día")
-                                    .replace("days","días")
-                                    .replace("week","semana")
-                                    .replace("weeks","semanas")
+            if(this.checkinDate !== undefined){
+                return this.checkinDate.replace("hours","horas")
+                                        .replace("hour","hora")
+                                        .replace("minutes","minutos")
+                                        .replace("seconds","segundos")
+                                        .replace("day","día")
+                                        .replace("days","días")
+                                        .replace("week","semana")
+                                        .replace("weeks","semanas")
+                                        .replace("month","mes")                
+            } else {
+                return this.checkinDate
+            }
         }
     },
     methods: {
