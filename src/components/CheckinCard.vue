@@ -82,8 +82,8 @@ export default {
                                     .replace("hour","hora")
                                     .replace("minutes","minutos")
                                     .replace("seconds","segundos")
-                                    .replace("day","dia")
-                                    .replace("days","dias")
+                                    .replace("day","día")
+                                    .replace("days","días")
                                     .replace("week","semana")
                                     .replace("weeks","semanas")
         }

@@ -13,6 +13,11 @@
               <img alt='Disponible en Google Play' style="width: 25%" src='https://play.google.com/intl/en_us/badges/images/generic/es-419_badge_web_generic.png'/>
             </a>
           </v-toolbar-items>
+          <v-toolbar-items>
+            <a class="text-xs-right hidden-sm-and-down" href='http://play.google.com/store/monkeyfit?pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+              <img alt='Disponible en Google Play' style="width: 100%; padding-top:12px;" src='/public/appstoresvg.svg'/>
+            </a>
+          </v-toolbar-items>
       </v-toolbar>
       <main>
         <v-carousel>
